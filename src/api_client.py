@@ -1,12 +1,13 @@
 import requests
 from urllib.parse import quote
 import time
+from config import BASE_URL
 
 
 class APIClient:
     def __init__(self, oauth_token=None):
         # Используется значение по умолчанию None, чтобы API-клиент мог быть создан без токена
-        self.base_url = 'https://cloud-api.yandex.net/v1/disk/'
+        self.base_url = BASE_URL
         self.headers = {"Authorization": f"OAuth {oauth_token}"} if oauth_token else {}
 
     def make_url(self, endpoint):
