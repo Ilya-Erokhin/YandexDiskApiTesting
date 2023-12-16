@@ -1,13 +1,15 @@
 import time
 from urllib.parse import quote
+import allure
 
 
+@allure.severity(allure.severity_level.CRITICAL)
 def test_get_data_in_disk(api_client):
     response = api_client.get()
     assert response.status_code == 200
     # print(json.dumps(response.json(), indent=2)) # Для вывода информации в JSON
 
-
+@allure.feature('Test Folder creation')
 def test_create_folder(api_client):
     folder_path = 'Test Folder'
     api_client.create_folder(folder_path)
@@ -22,10 +24,10 @@ def test_get_info_created_folder(api_client):
 
 def test_upload_file_into_folder(api_client):
     remote_folder_path = "/Test Folder"
-    local_file_name = '/TokenYandex.txt'
+    local_file_name = '/api_client.py.txt'
     remote_file_path = f"{remote_folder_path}{local_file_name}"
 
-    local_file_path = "C:\\Users\\illya\\OneDrive\\Рабочий стол\\TokenYandex.txt"
+    local_file_path = "C:\\Users\\illya\\OneDrive\\Рабочий стол\\Сon\Code\\api_client.py.txt"
     response = api_client.upload_file(local_file_path, remote_file_path, 'resources/upload', overwrite=True)
     assert response.status_code == 201
 
